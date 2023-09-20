@@ -22,13 +22,16 @@
                 "extraFileExtensions": [
                     ".astro"
                 ]
-            }
+            },
+            "rules": {}
         }
     ],
     "rules": {
         "indent": [
             "error",
             2
-        ]
+        ],
+        "@typescript-eslint/triple-slash-reference": "off",
+        "no-tabs": "off"
     }
 }
