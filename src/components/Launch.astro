@@ -1,0 +1,85 @@
+---
+import ArticleIcon from "./icons/ArticleIcon.astro";
+import WikipediaIcon from "./icons/WikipediaIcon.astro";
+interface Props {
+  id: string | undefined;
+  img: string | null | undefined;
+  success: boolean | null | undefined;
+  flightNumber: number | undefined;
+  details: string | null | undefined;
+  video: string | null | undefined;
+  name: string | undefined;
+  article: string | null | undefined;
+  wiki: string | null | undefined;
+}
+
+const { id, img, success, flightNumber, details, video, name, article, wiki } =
+  Astro.props;
+const launchStatus =
+  success === null ? "Pendind" : success === true ? "Succesful" : "Failure";
+const defaultImg =
+  "https://www.elonx.net/wp-content/uploads/Polaris_Dawn-300x300.png";
+---
+
+<section class="flex justify-center gap-5 flex-col">
+  <picture class="flex justify-between items-center">
+    <iframe
+      class="mx-auto rounded-lg aspect-video w-full"
+      src={`https://www.youtube.com/embed/${video}`}
+      title="YouTube video player"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen></iframe>
+  </picture>
+  <article
+    class="flex flex-col justify-center gap-4 h-full w-full mx-auto lg:flex-row sm:flex-col"
+  >
+    <picture>
+      <img
+        src={img ?? defaultImg}
+        alt={`${img ? "Patch" : "Default patch"} for launch ${id}`}
+      />
+    </picture>
+    <div class="flex-1 h-full">
+      <h2
+        class="my-2 text-3xl font-bold tracking-wide text-white flex justify-between items-center gap-2"
+      >
+        <span class="flex-1">{name}</span>
+        <span class="text-gray-400 text-xl">#{flightNumber}</span><span
+          class:list={[
+            "p-2 rounded-lg font-semibold tracking-wide text-xl",
+            {
+              "bg-green-400 text-green-900": success === true,
+              "bg-red-400 text-red-900": success === false,
+              "bg-gray-500 text-gray-900": success === null,
+            },
+          ]}>{launchStatus}</span
+        >
+      </h2>
+      <p class="mt-2 font-extralight text-xl text-gray-300">
+        {details ?? "No details about this launch"}
+      </p>
+      <div class="flex gap-4 justify-center items-center pt-4">
+        <a
+          href={article}
+          target="_blank"
+          class="cursor-pointer"
+          rel="noreferrer noopener"
+          title={article ? `Article about ${name}` : "No article available"}
+        >
+          <ArticleIcon size="40" color={article ? "white" : "gray"} />
+        </a>
+        <a
+          href={wiki}
+          target="_blank"
+          class="cursor-pointer"
+          rel="noreferrer noopener"
+          title={wiki
+            ? `Wikipedia page about ${name}`
+            : "No Wikipedia page available"}
+        >
+          <WikipediaIcon size="40" color={wiki ? "white" : "gray"} />
+        </a>
+      </div>
+    </div>
+  </article>
+</section>
