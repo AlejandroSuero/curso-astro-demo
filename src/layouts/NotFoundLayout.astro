@@ -1,0 +1,36 @@
+---
+import NotFoundHeader from "../components/headers/NotFoundHeader.astro";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>404 - Not Found</title>
+  </head>
+  <body class="bg-gradient-to-b from-gray-950 to-gray-800 min-h-screen pb-32">
+    <NotFoundHeader title="404 - Not Found" />
+    <main class="max-w-5xl px-4 m-auto">
+      <picture
+        class="fixed bottom-0 min-w-full flex flex-col justify-between items-center gap-5"
+      >
+        <img
+          src="https://i.imgur.com/qhMbkGi.jpg"
+          alt="John Travolta confused"
+        />
+      </picture>
+    </main>
+  </body>
+</html>
+<style is:global>
+  html {
+    font-family: system-ui, sans-serif;
+    background: #13151a;
+    background-size: 224px;
+    color-scheme: dark light;
+  }
+</style>
